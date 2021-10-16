@@ -9,7 +9,7 @@
 {% endif %}
 <div class="container">
     <h5>{{ message }}</h5>
-    <form action="{% url 'sign_up' %}" method="post">
+    <form action="{% url 'signup' %}" method="POST">
         {% csrf_token %}
         {% bootstrap_form form %}
 

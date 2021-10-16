@@ -44,4 +44,4 @@ def user_signup(request):
           
     else:
         form=UserCreationForm()
-        return render(request,'authentication/signup.html', {"message":message, "form":form})
+    return render(request,'authentication/signup.html', {"message":message, "form":form})
