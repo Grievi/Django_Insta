@@ -1,12 +1,14 @@
 {% extends 'base.html'%}
 
 {% block content %} 
+<div class="container">
+    <h1>{{ message }}</h1>
 
-<h1>{{ message }}</h1>
-
-<a class="btn btn-outline-success" href="">Login</a>
+<a class="btn btn-outline-success" href="{% url 'login' %}">Login</a>
 <a class="btn btn-outline-success" href="">Logout</a>
 <a class="btn btn-outline-success" href="">Sign up</a>
+</div>
+
 
 
 
