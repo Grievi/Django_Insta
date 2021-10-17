@@ -50,6 +50,11 @@ class Image(models.Model):
             image_name__icontains=search_term)
         return images
 
+    @classmethod
+    def get_single_image(cls, id):
+        image = cls.objects.get(id=id)
+        return image
+
 class Comment(models.Model):
     user= models.ForeignKey(User,on_delete=models.CASCADE)
     image = models.ForeignKey(Image, on_delete=models.CASCADE)
