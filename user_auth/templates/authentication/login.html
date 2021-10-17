@@ -3,7 +3,7 @@
 {% block content%}
 <div class="container">
   <h3>{{ message }}</h3>
-<form action="{% url for 'login' %}" 
+<form action="{% url 'login' %}" 
 method="POST">
     {% csrf_token %}
     

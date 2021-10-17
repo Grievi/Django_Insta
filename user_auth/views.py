@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 
+
 def login_user(request):
     message='Instagram'
     if request.method== 'POST':
@@ -20,7 +21,7 @@ def login_user(request):
 
             return render(request, 'authentication/login.html')
     else:
-        return render(request, 'authentication/login.html', {"message":message})
+        return render(request, 'authentication/login.html', {"message": message})
 
 def logout_user(request):
     logout(request)
