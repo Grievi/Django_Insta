@@ -22,6 +22,11 @@ class Profile(models.Model):
     def delete_profile(self):
         self.delete()
 
+    @classmethod
+    def get_profile_by_user(cls, user):
+        profile = cls.objects.filter(user=user)
+        return profile
+
 class Image(models.Model):
     user=models.ForeignKey(User, on_delete=models.CASCADE,related_name='images')
     image= models.ImageField(upload_to='image') 
