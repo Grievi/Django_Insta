@@ -37,4 +37,11 @@ class Image(models.Model):
     def delete_image(self):
         self.delete()
 
-       
+    def update_image(self):
+        self.update_image()
+
+class Comment(models.Model):
+    user= models.ForeignKey(User,on_delete=models.CASCADE)
+    image = models.ForeignKey(Image, on_delete=models.CASCADE)
+    comment = models.TextFild()
+    comment_date = models.DateTimeField(auto_now_add=True)
