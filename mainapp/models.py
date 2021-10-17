@@ -39,6 +39,17 @@ class Image(models.Model):
     def update_image(self):
         self.update_image()
 
+    @classmethod
+    def get_images_by_user(cls, user):
+        images = cls.objects.filter(user=user)
+        return images
+
+    @classmethod
+    def search_by_image_name(cls, search_term):
+        images = cls.objects.filter(
+            image_name__icontains=search_term)
+        return images
+
 class Comment(models.Model):
     user= models.ForeignKey(User,on_delete=models.CASCADE)
     image = models.ForeignKey(Image, on_delete=models.CASCADE)
