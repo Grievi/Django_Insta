@@ -16,7 +16,7 @@ class Profile(models.Model):
     def save_profile(self):
         self.save()
 
-    def update_profile(self):
+    def update_profile(self,):
         self.save()
 
     def delete_profile(self):
@@ -25,8 +25,7 @@ class Profile(models.Model):
 class Image(models.Model):
     user=models.ForeignKey(User, on_delete=models.CASCADE,related_name='images')
     image= models.ImageField(upload_to='image') 
-    image_name=models.CharField(max_length=60)
-    image_caption=models.CharField(max_length=60)
+    image_name=models.CharField(max_length=60,default=True)
     profile=models.ForeignKey(User,on_delete=models.CASCADE)
     likes=models.IntegerField(default=0)
     comments=models.IntegerField(default=0)
@@ -53,7 +52,8 @@ class Comment(models.Model):
         self.save()
 
 class Likes(models.Model):
-    image=models.ForeignKey(Image, on_delete=models.CASCADE)
+    image=models.ForeignKey(Image, on_delete=models.CASCADE, related_name='images')
     user=models.ForeignKey(User, on_delete=models.CASCADE)
 
-    
+    def __str__(self):
+       return self.likes 
