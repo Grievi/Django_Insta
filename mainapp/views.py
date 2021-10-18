@@ -31,18 +31,6 @@ def save_image(request):
     else:
         return render(request, 'profile.html', {'message':'Upload image!'})
 
-@login_required(login_url='login')
-def search_images(request):
-    if 'search' in request.GET and request.GET['search']:
-        search_term = request.GET.get('search').lower()
-        images = Image.search_by_image_name(search_term)
-        message = f'{search_term}'
-        title = message
-
-        return render(request, 'search.html', {'success': message, 'images': images})
-    else:
-        message = 'You havent searched for any term'
-        return render(request, 'search.html', {'danger': message})
 
 def like_image(request, id):
     likes = Likes.objects.filter(image_id=id).first()
@@ -84,7 +72,7 @@ def save_comment(request):
         user = request.user
         comment = Comment(comment=comment, image_id=image_id, user_id=user.id)
         comment.save_comment()
-        image.comment_count = image.comment_count + 1
+        image.comments = image.comments + 1
         image.save()
         return redirect('/picture/' + str(image_id))
     else:
@@ -94,20 +82,24 @@ def user_profile(request, id):
 
     if User.objects.filter(id=id).exists():
         user = User.objects.get(id=id)
-        images = Image.objects.filter(user_id=id)
+        results = Image.objects.filter(user_id=id)
         profile = Profile.objects.filter(user_id=id).first()
-        return render(request, 'user_profile.html', {'images': images, 'profile': profile, 'user': user})
+        return render(request, 'user_profile.html', {'results': results, 'profile': profile, 'user': user})
     else:
         return redirect('home')
 
 def search_images(request):
     if 'search' in request.GET and request.GET['search']:
         search_term = request.GET.get('search').lower()
-        images = Image.search_by_image_name(search_term)
-        message = f'{search_term}'
-        title = message
+        results = Image.search_by_image_name(search_term)
 
-        return render(request, 'search.html', {'success': message, 'images': images})
+        message = f'{search_term}'
+        params = {
+            'results': results,
+            'message': message
+        }
+
+        return render(request, 'search.html',params)
     else:
         message = 'Enter your search keyword'
-        return render(request, 'search.html', {'danger': message})
+        return render(request, 'search.html', {'message': message})
