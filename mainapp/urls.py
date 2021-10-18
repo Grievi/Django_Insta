@@ -10,7 +10,8 @@ urlpatterns=[
     path('like/<int:id>/', views.like_image, name='like'),
     path('picture/<int:id>/', views.single_image, name='single_img'),
     path('comment/add', views.save_comment, name='comment.add'),
-    path('user/<int:id>/', views.user_profile, name='user.profile'),
+    path('user/<int:id>/', views.user_profile, name='user_profile'),
+    path('search/', views.search_images, name='image_search'),
 ]
 
 if settings.DEBUG:
