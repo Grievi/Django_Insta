@@ -89,3 +89,13 @@ def save_comment(request):
         return redirect('/picture/' + str(image_id))
     else:
         return redirect('home')
+
+def user_profile(request, id):
+
+    if User.objects.filter(id=id).exists():
+        user = User.objects.get(id=id)
+        images = Image.objects.filter(user_id=id)
+        profile = Profile.objects.filter(user_id=id).first()
+        return render(request, 'user-profile.html', {'images': images, 'profile': profile, 'user': user})
+    else:
+        return redirect('home')
