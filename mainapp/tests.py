@@ -12,6 +12,10 @@ class TestProfile(TestCase):
     def test_instance(self):
         self.assertTrue(isinstance(self.profile_test, Profile))
 
+    def test_bio(self):
+        profile=Profile.objects.get(bio='Hello Guys mind your own business')
+        self.assertEqual(profile.bio, 'Hello Guys mind your own business')
+
 class ImageTest(TestCase):
     def setUp(self):
         self.profile_test = Profile(name='moringa', user=User(username='Grievi'))
@@ -31,3 +35,5 @@ class ImageTest(TestCase):
         self.image_test.delete_image()
         after = Profile.objects.all()
         self.assertTrue(len(after) < 1)
+
+
