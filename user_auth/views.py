@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 
 
+
 def login_user(request):
     message='Instagram'
     if request.method== 'POST':
@@ -37,6 +38,9 @@ def user_signup(request):
             form.save()
             username=form.cleaned_data['username']
             password=form.cleaned_data['password1']
+            email = form.cleaned_data['email']
+            
+
             user = authenticate(username=username, password=password)
             login(request, user)
             messages.success(request,("Account created successfully"))
