@@ -64,3 +64,28 @@ def like_image(request, id):
         image.like_count = image.like_count + 1
         image.save()
         return redirect('home')
+
+def single_image(request, id):
+    image = Image.objects.get(id=id)
+    related_images = Image.objects.filter(
+        user_id=image.user_id).order_by('-image_date')
+    title = image.image_name
+    if Image.objects.filter(id=id).exists():
+        comments = Comment.objects.filter(image_id=id)
+        return render(request, 'picture.html', {'image': image, 'comments': comments, 'images': related_images, 'title': title})
+    else:
+        return redirect('home')
+
+def save_comment(request):
+    if request.method == 'POST':
+        comment = request.POST['comment']
+        image_id = request.POST['image_id']
+        image = Image.objects.get(id=image_id)
+        user = request.user
+        comment = Comment(comment=comment, image_id=image_id, user_id=user.id)
+        comment.save_comment()
+        image.comment_count = image.comment_count + 1
+        image.save()
+        return redirect('/picture/' + str(image_id))
+    else:
+        return redirect('home')
