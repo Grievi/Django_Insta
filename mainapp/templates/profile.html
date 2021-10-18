@@ -9,7 +9,7 @@
                 <div class="row">
                     <div class="col-md-1"></div>
                     <div class="col-md-3">
-                        <img class="rounded-circle account-img" src="{{ user.profile.profile_picture.url }}">
+                        <img class="rounded-circle account-img" src="{{ user.profile.profile_photo.url }}">
                     </div>
                     <div class="col-md-6 mt-3">
                         <div class="media-body">
@@ -49,8 +49,8 @@
                 <div class="modal-content">
                     <form action="" method="post" novalidate enctype="multipart/form-data" class="mr-4 mt-4 ml-4 mb-4">
                         {% csrf_token%}
-                        {{ user_form|crispy}}
-                        {{ prof_form|crispy}}
+                        {{ user_form }}
+                        {{ prof_form }}
                         <button type="submit" class="btn btn-primary btn-sm"> Update Profile</button>
                     </form>
                 </div>
