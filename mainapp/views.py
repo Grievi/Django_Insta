@@ -50,18 +50,18 @@ def like_image(request, id):
         # This will unlike
         likes.delete()
         image = Image.objects.get(id=id)
-        if image.like_count == 0:
-            image.like_count = 0
+        if image.likes == 0:
+            image.likes = 0
             image.save()
         else:
-            image.like_count -= 1
+            image.likes -= 1
             image.save()
         return redirect('home')
     else:
         likes = Likes(image_id=id, user_id=request.user.id)
         likes.save()
         image = Image.objects.get(id=id)
-        image.like_count = image.like_count + 1
+        image.likes = image.likes + 1
         image.save()
         return redirect('home')
 
@@ -96,7 +96,7 @@ def user_profile(request, id):
         user = User.objects.get(id=id)
         images = Image.objects.filter(user_id=id)
         profile = Profile.objects.filter(user_id=id).first()
-        return render(request, 'user-profile.html', {'images': images, 'profile': profile, 'user': user})
+        return render(request, 'user_profile.html', {'images': images, 'profile': profile, 'user': user})
     else:
         return redirect('home')
 
