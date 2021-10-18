@@ -8,11 +8,13 @@
     
     <a class="btn btn-outline-success" href="{% url 'logout' %}">Logout</a>
 
+    <a class="btn btn-outline-success" href="{% url 'sign_up' %}">Sign up</a>
+
     {% else %}
     
     <a class="btn btn-outline-success" href="{% url 'login' %}">Login</a>
 
-    <a class="btn btn-outline-success" href="{% url 'sign_up' %}">Sign up</a>
+    
 
     {% endif %}
 </div>
