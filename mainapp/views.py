@@ -31,10 +31,6 @@ def save_image(request):
     else:
         return render(request, 'profile.html', {'message':'Upload image!'})
 
-
-
-
-
 @login_required(login_url='login')
 def search_images(request):
     if 'search' in request.GET and request.GET['search']:
@@ -47,3 +43,24 @@ def search_images(request):
     else:
         message = 'You havent searched for any term'
         return render(request, 'search.html', {'danger': message})
+
+def like_image(request, id):
+    likes = Likes.objects.filter(image_id=id).first()
+    if Likes.objects.filter(image_id=id, user_id=request.user.id).exists():
+        # This will unlike
+        likes.delete()
+        image = Image.objects.get(id=id)
+        if image.like_count == 0:
+            image.like_count = 0
+            image.save()
+        else:
+            image.like_count -= 1
+            image.save()
+        return redirect('home')
+    else:
+        likes = Likes(image_id=id, user_id=request.user.id)
+        likes.save()
+        image = Image.objects.get(id=id)
+        image.like_count = image.like_count + 1
+        image.save()
+        return redirect('home')
