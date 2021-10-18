@@ -7,7 +7,7 @@ class TestProfile(TestCase):
         self.user = User(username='moringa')
         self.user.save()
 
-        self.profile_test= Profile(id=1, name="image", profile_photo='default.jpg', bio='Welcome to my Channel', user=self.user)
+        self.profile_test= Profile(id=1, name="image", profile_photo='static/img/homepage.jpg', bio='Welcome to my Channel', user=self.user)
 
     def test_instance(self):
         self.assertTrue(isinstance(self.profile_test, Profile))
@@ -36,4 +36,12 @@ class ImageTest(TestCase):
         after = Profile.objects.all()
         self.assertTrue(len(after) < 1)
 
+class TestLikes(TestCase):
+    def setUp(self):
+        user =User.objects.create(name='moringa',username='moringa',)
 
+        Profile.objects.create(bio='Mind your bio',profile_photo='static/img/homepage.jpg')
+
+        Image.objects.create(image_caption='test1',image='default.png',profile_id=user.id,user_id=user.id)
+
+        Likes.objects.create(image_id=Image.image.id,user_id=user.id)
