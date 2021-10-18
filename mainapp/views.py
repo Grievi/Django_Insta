@@ -99,3 +99,15 @@ def user_profile(request, id):
         return render(request, 'user-profile.html', {'images': images, 'profile': profile, 'user': user})
     else:
         return redirect('home')
+
+def search_images(request):
+    if 'search' in request.GET and request.GET['search']:
+        search_term = request.GET.get('search').lower()
+        images = Image.search_by_image_name(search_term)
+        message = f'{search_term}'
+        title = message
+
+        return render(request, 'search.html', {'success': message, 'images': images})
+    else:
+        message = 'Enter your search keyword'
+        return render(request, 'search.html', {'danger': message})
