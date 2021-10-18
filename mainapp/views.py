@@ -31,7 +31,7 @@ def save_image(request):
     else:
         return render(request, 'profile.html', {'message':'Upload image!'})
 
-
+@login_required(login_url='login')
 def like_image(request, id):
     likes = Likes.objects.filter(image_id=id).first()
     if Likes.objects.filter(image_id=id, user_id=request.user.id).exists():
@@ -53,6 +53,7 @@ def like_image(request, id):
         image.save()
         return redirect('home')
 
+@login_required(login_url='login')
 def single_image(request, id):
     image = Image.objects.get(id=id)
     related_images = Image.objects.filter(
@@ -64,6 +65,7 @@ def single_image(request, id):
     else:
         return redirect('home')
 
+@login_required(login_url='login')
 def save_comment(request):
     if request.method == 'POST':
         comment = request.POST['comment']
@@ -78,6 +80,7 @@ def save_comment(request):
     else:
         return redirect('home')
 
+@login_required(login_url='login')
 def user_profile(request, id):
 
     if User.objects.filter(id=id).exists():
@@ -88,6 +91,7 @@ def user_profile(request, id):
     else:
         return redirect('home')
 
+@login_required(login_url='login')
 def search_images(request):
     if 'search' in request.GET and request.GET['search']:
         search_term = request.GET.get('search').lower()

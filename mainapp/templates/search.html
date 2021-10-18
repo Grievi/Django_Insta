@@ -9,7 +9,7 @@
             {% else %}
             <h5 class="text-center"> Found 0 users with username <strong>{{danger}}</strong></h5>
 
-            <a class="d-block mx-auto" href="home">
+            <a class="d-block mx-auto" href="{% url 'home' %}">
                 <button class="btn btn-sm btn-info d-block mx-auto">Back Home</button>
             </a>
             {% endif %}

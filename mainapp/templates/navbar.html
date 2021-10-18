@@ -1,5 +1,4 @@
-
-  <nav class="navbar navbar-expand-lg">
+<nav class="navbar navbar-expand-lg">
     <div style="color: black;" class="container container-fluid">
         <a style="
             font-family: 'Lobster', cursive;
@@ -17,7 +16,7 @@
         <div class="collapse navbar-collapse" id="navbarContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <div class="container-fluid search-form text-center">
-                    <form class="d-flex text-center" action="{% url 'image_search' %}">
+                    <form class="d-flex" action="{}">
                         <input class="form-control me-2" type="search" name="search" placeholder="Search Image name....." aria-label="Search">
                     </form>
                 </div>
@@ -30,7 +29,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a style="color: black;" class="nav-link" href="{% url 'profile' %}">
+                    <a style="color: black;"  class="nav-link" href="{% url 'profile' %}">
                         <i class="fa fa-user"></i>
                     </a>
                 </li>
