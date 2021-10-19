@@ -20,13 +20,13 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-3">
-                        <a href="{% url 'user.profile' image.user.id %}">
-                            <img src="" alt=""
+                        <a href="{% url 'user_profile' image.user.id %}">
+                            <img src="../../media/image/img4.jpg" alt=""
                              class="rounded-circle border ml-3 mt-2  mr-3" width="55" height="55">
                         </a>
                     </div>
                     <div class="col-md-6 mt-2">
-                        <span><strong><a href="{% url 'user.profile' image.user.id %}">{{ image.user.username }}</a>
+                        <span><strong><a href="{% url 'user_profile' image.user.id %}">{{ image.user.username }}</a>
                         </strong>
                         </span><br>
                         <img src="{{ image.image.url }}"  alt="">

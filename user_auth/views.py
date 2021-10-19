@@ -23,6 +23,7 @@ def login_user(request):
 
             return render(request, 'authentication/login.html')
     else:
+
         return render(request, 'authentication/login.html', {"message": message})
 
 def logout_user(request):

@@ -96,6 +96,7 @@ def user_profile(request, id):
     else:
         return redirect('home')
 
+@login_required(login_url='login')
 def create_post(request):
 
     post = Image(user = request.user)
@@ -143,13 +144,3 @@ def search_images(request):
         return render(request, 'search.html', {'message': message})
 
 
-# def FollowView(request,pk):
-#     """This handles liking a profile
-#     Args:
-#         request ([type]): [description]
-#         pk ([type]): [description]
-#     """
-#     profile = get_object_or_404(Profile, pk = request.POST['profile_pk'])
-#     profile.followers.add(request.user)
-#     pk = profile.user.pk
-#     return HttpResponseRedirect(reverse('profile', args=[str(pk)]))
