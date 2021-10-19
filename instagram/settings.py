@@ -26,8 +26,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # DEBUG = os.environ.get('DEBUG', True)
 
-DEBUG = config('DEBUG', cast=bool)
-SECRET_KEY = config('SECRET_KEY')
+DEBUG = True
+SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
