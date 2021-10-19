@@ -1,7 +1,11 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
-from .forms import UpdateProfileForm
+from .forms import UpdateProfileForm,CreateNewPostForm
+from django.contrib import messages
+from django.http import HttpResponseRedirect
 from mainapp.models import *
+from django.shortcuts import get_object_or_404
+from django.urls import reverse
 
 @login_required(login_url='login')
 def index(request):
@@ -86,16 +90,31 @@ def user_profile(request, id):
 
     if User.objects.filter(id=id).exists():
         user = User.objects.get(id=id)
-        results = Image.objects.filter(user_id=id)
+        image = Image.objects.filter(user_id=id)
         profile = Profile.objects.filter(user_id=id).first()
-        return render(request, 'user_profile.html', {'results': results, 'profile': profile, 'user': user})
+        return render(request, 'user_profile.html', {'results': image, 'profile': profile, 'user': user})
     else:
         return redirect('home')
 
+def create_post(request):
+
+    post = Image(user = request.user)
+    if request.method == 'POST':
+        form = CreateNewPostForm(request.POST,request.FILES,instance=post)
+        if form.is_valid():
+            form.save()
+            messages.success(request,"Post created!")
+        return redirect('home')
+    else:
+        form = CreateNewPostForm(instance=post)
+        return render(request,'create_post.html',{'form':form})
+
 @login_required(login_url='login')
 def update_profile(request):
+
     if request.method == 'POST':
-        form = UpdateProfileForm(request.POST,request.FILES,instance=request.user.profile)
+        form = UpdateProfileForm(request.POST,instance=request.user.profile)
+
         if form.is_valid():
             form.save() 
             return redirect('user_profile',request.user.pk)
@@ -122,3 +141,15 @@ def search_images(request):
     else:
         message = 'Enter your search keyword'
         return render(request, 'search.html', {'message': message})
+
+
+# def FollowView(request,pk):
+#     """This handles liking a profile
+#     Args:
+#         request ([type]): [description]
+#         pk ([type]): [description]
+#     """
+#     profile = get_object_or_404(Profile, pk = request.POST['profile_pk'])
+#     profile.followers.add(request.user)
+#     pk = profile.user.pk
+#     return HttpResponseRedirect(reverse('profile', args=[str(pk)]))

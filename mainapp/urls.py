@@ -13,6 +13,7 @@ urlpatterns=[
     path('user/<int:id>/', views.user_profile, name='user_profile'),
     path('search/', views.search_images, name='image_search'),
     path('update_profile/', views.update_profile, name='update_profile'),
+    path('post', views.create_post, name='post')
 
 ]
 

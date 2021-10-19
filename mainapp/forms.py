@@ -9,9 +9,9 @@ class UpdateProfileForm(ModelForm):
         fields=('user','username','bio','profile_photo')
         exclude=['user']
 
-# class CreateNewPostForm(ModelForm):
-#     class Meta:
-#         model=Image
-#         fields='__all__'
-#         exclude=['user', 'likes']
+class CreateNewPostForm(ModelForm):
+    class Meta:
+        model=Image
+        fields='__all__'
+        exclude=['user', 'likes','profile','comments']
 

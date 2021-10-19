@@ -33,7 +33,6 @@ class Image(models.Model):
     image_name=models.CharField(max_length=60)
     image_date = models.DateTimeField(auto_now_add=True,)
     image_caption = models.TextField(blank=True)
-    profile=models.ForeignKey(User,on_delete=models.CASCADE)
     likes=models.IntegerField(default=0)
     comments=models.IntegerField(default=0)
 
