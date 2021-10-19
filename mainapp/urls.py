@@ -12,6 +12,8 @@ urlpatterns=[
     path('comment', views.save_comment, name='add_comment'),
     path('user/<int:id>/', views.user_profile, name='user_profile'),
     path('search/', views.search_images, name='image_search'),
+    path('update_profile/', views.update_profile, name='update_profile'),
+
 ]
 
 if settings.DEBUG:

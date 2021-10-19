@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
-from .models import *
+from .forms import UpdateProfileForm
+from mainapp.models import *
 
 @login_required(login_url='login')
 def index(request):
@@ -90,6 +91,20 @@ def user_profile(request, id):
         return render(request, 'user_profile.html', {'results': results, 'profile': profile, 'user': user})
     else:
         return redirect('home')
+
+@login_required(login_url='login')
+def update_profile(request):
+    if request.method == 'POST':
+        form = UpdateProfileForm(request.POST,request.FILES,instance=request.user.profile)
+        if form.is_valid():
+            form.save() 
+            return redirect('user_profile',request.user.pk)
+        else:
+            form = UpdateProfileForm(instance=request.user.profile)
+            return render(request,'update_profile.html',{"form":form})
+    else:
+        form = UpdateProfileForm(instance=request.user.profile)
+        return render(request,'update_profile.html',{"form":form})
 
 @login_required(login_url='login')
 def search_images(request):

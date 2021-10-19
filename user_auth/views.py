@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
+from mainapp.models import *
 
 
 
@@ -38,10 +39,11 @@ def user_signup(request):
             form.save()
             username=form.cleaned_data['username']
             password=form.cleaned_data['password1']
-            email = form.cleaned_data['email']
+            
             
 
-            user = authenticate(username=username, password=password)
+            user = authenticate(username=username, password=password )
+            Profile.objects.create(user=user)
             login(request, user)
             messages.success(request,("Account created successfully"))
 
