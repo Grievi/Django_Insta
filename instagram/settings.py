@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cloudinary',
     'tinymce',
     'bootstrap5',
     'mainapp',
@@ -95,7 +96,13 @@ DATABASES = {
         'PASSWORD': 'moringa'
     }
 }
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'da1uu0btf',
+    'API_KEY': '435658743492719',
+    'API_SECRET': '435658743492719',
+}
 
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

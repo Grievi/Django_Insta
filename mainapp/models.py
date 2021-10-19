@@ -1,6 +1,7 @@
 from django.db import models
 import datetime as dt
 from django.contrib.auth.models import User
+from cloudinary.models import CloudinaryField
 
 
 class Profile(models.Model):
@@ -8,7 +9,7 @@ class Profile(models.Model):
     username=models.CharField(max_length=50)
     date_joined = models.DateTimeField(auto_now_add=True)
     bio = models.CharField(max_length=500)
-    profile_photo = models.ImageField(upload_to='media/', default='default.png')
+    profile_photo = CloudinaryField('image')
 
     def __str__(self):
         return self.user.username 
@@ -29,7 +30,7 @@ class Profile(models.Model):
 
 class Image(models.Model):
     user=models.ForeignKey(User, on_delete=models.CASCADE,related_name='images')
-    image= models.ImageField(upload_to='image') 
+    image= CloudinaryField('image') 
     image_name=models.CharField(max_length=60)
     image_date = models.DateTimeField(auto_now_add=True,)
     image_caption = models.TextField(blank=True)
