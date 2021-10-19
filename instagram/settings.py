@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # DEBUG = os.environ.get('DEBUG', True)
 
 DEBUG = True
-SECRET_KEY = os.environ['SECRET_KEY']
+SECRET_KEY = 'moringaschool'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
